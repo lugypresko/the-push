@@ -7,34 +7,11 @@ export default function InstructorSection() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-heebo font-bold text-neutral-800 mb-10 text-center">מוביל התכנית: מי אני ולמה אפשר לסמוך עליי?</h2>
           
-          <div className="flex flex-col md:flex-row items-center gap-10">
+          <div className="flex flex-col md:flex-row items-start gap-10">
             <div className="w-full md:w-2/5">
-              <div 
-                className="relative bg-neutral-900 rounded-xl shadow-md overflow-hidden" 
-                style={{ 
-                  width: "300px", 
-                  height: "300px", 
-                  margin: "0 auto",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              >
-                <img 
-                  src="/assets/WhatsApp_Image_2023-06-22_at_13.37.06-removebg-preview.png" 
-                  alt="איתי פוירשטיין" 
-                  style={{ 
-                    width: "auto",
-                    height: "100%",
-                    maxWidth: "100%",
-                    objectFit: "cover" 
-                  }}
-                />
-              </div>
-              
-              <div className="bg-white mx-auto w-3/4 mt-4 rounded-lg shadow-lg p-4 text-center">
-                <h3 className="text-xl font-heebo font-bold text-neutral-800">איתי פוירשטיין</h3>
-                <p className="text-primary font-medium">מנטור ומוביל תכניות מנהיגות</p>
+              <div className="bg-white mx-auto rounded-lg shadow-lg p-5 text-center mb-6">
+                <h3 className="text-2xl font-heebo font-bold text-neutral-800 mb-2">איתי פוירשטיין</h3>
+                <p className="text-primary font-medium text-lg">מנטור ומוביל תכניות מנהיגות</p>
               </div>
             </div>
             
