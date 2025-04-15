@@ -9,12 +9,26 @@ export default function InstructorSection() {
           
           <div className="flex flex-col md:flex-row items-center gap-10">
             <div className="w-full md:w-2/5">
-              <div className="relative bg-neutral-900 rounded-xl shadow-md" style={{ maxWidth: "300px", margin: "0 auto" }}>
+              <div 
+                className="relative bg-neutral-900 rounded-xl shadow-md overflow-hidden" 
+                style={{ 
+                  width: "300px", 
+                  height: "300px", 
+                  margin: "0 auto",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
                 <img 
                   src="/assets/WhatsApp_Image_2023-06-22_at_13.37.06-removebg-preview.png" 
                   alt="איתי פוירשטיין" 
-                  className="w-full h-auto rounded-xl mx-auto"
-                  style={{ maxHeight: "350px", objectFit: "contain" }}
+                  style={{ 
+                    width: "auto",
+                    height: "100%",
+                    maxWidth: "100%",
+                    objectFit: "cover" 
+                  }}
                 />
               </div>
               
