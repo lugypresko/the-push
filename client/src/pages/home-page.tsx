@@ -2,6 +2,7 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import HeroSection from "@/components/sections/hero-section";
 import TargetSection from "@/components/sections/target-section";
+import InstructorSection from "@/components/sections/instructor-section";
 import AboutSection from "@/components/sections/about-section";
 import BenefitsSection from "@/components/sections/benefits-section";
 import OutcomesSection from "@/components/sections/outcomes-section";
@@ -16,6 +17,7 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <TargetSection />
+        <InstructorSection />
         <AboutSection />
         <BenefitsSection />
         <OutcomesSection />
