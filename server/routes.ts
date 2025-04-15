@@ -1,3 +1,11 @@
+
+import path from 'path';
+
+export const downloadPdf = async (req: any, res: any) => {
+  const filePath = path.join(__dirname, '../public/assets/program.pdf');
+  res.download(filePath);
+};
+
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";

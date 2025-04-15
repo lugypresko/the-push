@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { DownloadButton } from "@/components/ui/download-button"; // Added import
 import { apiRequest } from "@/lib/queryClient";
 
 const formSchema = z.object({
