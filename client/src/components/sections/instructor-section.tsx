@@ -11,11 +11,10 @@ export default function InstructorSection() {
             <div className="w-full md:w-2/5">
               <div className="relative">
                 <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1587" 
+                  src="@assets/WhatsApp_Image_2023-06-22_at_13.37.06-removebg-preview.png" 
                   alt="איתי פוירשטיין" 
-                  className="w-full h-auto rounded-xl shadow-md"
+                  className="w-full h-auto rounded-xl shadow-md bg-neutral-900"
                 />
-                <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-neutral-900/40 to-transparent rounded-xl"></div>
               </div>
               
               <div className="bg-white -mt-16 mx-auto w-3/4 relative z-10 rounded-lg shadow-lg p-4 text-center">
