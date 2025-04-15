@@ -172,33 +172,39 @@ export default function ContactSection() {
             
             <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
               <div>
-                <div className="inline-block bg-neutral-100 p-3 rounded-full mb-3">
-                  <Phone className="text-primary h-5 w-5" />
-                </div>
-                <h4 className="font-heebo font-medium mb-1">טלפון</h4>
-                <p className="text-neutral-600">
-                  <a href="tel:+972544731214" className="hover:text-primary transition-colors duration-300">054-4731214</a>
-                </p>
+                <a href="tel:+972544731214" className="block group">
+                  <div className="inline-block bg-neutral-100 p-3 rounded-full mb-3 group-hover:bg-primary/10 transition-colors duration-300">
+                    <Phone className="text-primary h-5 w-5" />
+                  </div>
+                  <h4 className="font-heebo font-medium mb-1">טלפון</h4>
+                  <p className="text-neutral-600 group-hover:text-primary transition-colors duration-300">
+                    054-4731214
+                  </p>
+                </a>
               </div>
               
               <div>
-                <div className="inline-block bg-neutral-100 p-3 rounded-full mb-3">
-                  <Mail className="text-primary h-5 w-5" />
-                </div>
-                <h4 className="font-heebo font-medium mb-1">אימייל</h4>
-                <p className="text-neutral-600">
-                  <a href="mailto:itayf32@gmail.com" className="hover:text-primary transition-colors duration-300">itayf32@gmail.com</a>
-                </p>
+                <a href="mailto:itayf32@gmail.com" className="block group">
+                  <div className="inline-block bg-neutral-100 p-3 rounded-full mb-3 group-hover:bg-primary/10 transition-colors duration-300">
+                    <Mail className="text-primary h-5 w-5" />
+                  </div>
+                  <h4 className="font-heebo font-medium mb-1">אימייל</h4>
+                  <p className="text-neutral-600 group-hover:text-primary transition-colors duration-300">
+                    itayf32@gmail.com
+                  </p>
+                </a>
               </div>
               
               <div>
-                <div className="inline-block bg-neutral-100 p-3 rounded-full mb-3">
-                  <Linkedin className="text-primary h-5 w-5" />
-                </div>
-                <h4 className="font-heebo font-medium mb-1">LinkedIn</h4>
-                <p className="text-neutral-600">
-                  <a href="#" className="hover:text-primary transition-colors duration-300">איתי פוירשטיין</a>
-                </p>
+                <a href="https://www.linkedin.com/in/itay-feuerstein/" target="_blank" rel="noopener noreferrer" className="block group">
+                  <div className="inline-block bg-neutral-100 p-3 rounded-full mb-3 group-hover:bg-primary/10 transition-colors duration-300">
+                    <Linkedin className="text-primary h-5 w-5" />
+                  </div>
+                  <h4 className="font-heebo font-medium mb-1">LinkedIn</h4>
+                  <p className="text-neutral-600 group-hover:text-primary transition-colors duration-300">
+                    איתי פוירשטיין
+                  </p>
+                </a>
               </div>
             </div>
           </div>
