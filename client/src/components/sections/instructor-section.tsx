@@ -9,15 +9,16 @@ export default function InstructorSection() {
           
           <div className="flex flex-col md:flex-row items-center gap-10">
             <div className="w-full md:w-2/5">
-              <div className="relative">
+              <div className="relative bg-neutral-900 rounded-xl shadow-md" style={{ maxWidth: "300px", margin: "0 auto" }}>
                 <img 
-                  src="@assets/WhatsApp_Image_2023-06-22_at_13.37.06-removebg-preview.png" 
+                  src="/assets/WhatsApp_Image_2023-06-22_at_13.37.06-removebg-preview.png" 
                   alt="איתי פוירשטיין" 
-                  className="w-full h-auto rounded-xl shadow-md bg-neutral-900"
+                  className="w-full h-auto rounded-xl mx-auto"
+                  style={{ maxHeight: "350px", objectFit: "contain" }}
                 />
               </div>
               
-              <div className="bg-white -mt-16 mx-auto w-3/4 relative z-10 rounded-lg shadow-lg p-4 text-center">
+              <div className="bg-white mx-auto w-3/4 mt-4 rounded-lg shadow-lg p-4 text-center">
                 <h3 className="text-xl font-heebo font-bold text-neutral-800">איתי פוירשטיין</h3>
                 <p className="text-primary font-medium">מנטור ומוביל תכניות מנהיגות</p>
               </div>
