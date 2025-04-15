@@ -196,7 +196,7 @@ export default function ContactSection() {
               </div>
               
               <div>
-                <a href="https://www.linkedin.com/in/itay-feuerstein/" target="_blank" rel="noopener noreferrer" className="block group">
+                <a href="https://www.linkedin.com/in/itayfoyerstein/" target="_blank" rel="noopener noreferrer" className="block group">
                   <div className="inline-block bg-neutral-100 p-3 rounded-full mb-3 group-hover:bg-primary/10 transition-colors duration-300">
                     <Linkedin className="text-primary h-5 w-5" />
                   </div>
