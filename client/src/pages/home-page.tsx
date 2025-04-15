@@ -12,7 +12,7 @@ import ContactSection from "@/components/sections/contact-section";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-neutral-100 text-neutral-800">
+    <div className="min-h-screen bg-neutral-100 text-neutral-800 overflow-x-hidden">
       <Header />
       <main>
         <HeroSection />

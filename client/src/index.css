@@ -24,7 +24,7 @@
 
 @layer components {
   .container {
-    @apply px-4 mx-auto;
+    @apply px-4 sm:px-6 md:px-8 mx-auto max-w-[90rem];
   }
 
   .rtl-specific {
