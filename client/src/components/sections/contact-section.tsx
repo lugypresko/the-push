@@ -41,7 +41,7 @@ export default function ContactSection() {
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (values: z.infer<typeof formSchema>) => 
+    mutationFn: (values: z.infer<typeof formSchema>) =>
       apiRequest("POST", "/api/contact", values),
     onSuccess: () => {
       setIsSubmitted(true);
@@ -68,109 +68,23 @@ export default function ContactSection() {
     <section id="contact" className="py-20 bg-neutral-100">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-heebo font-bold text-neutral-800 mb-8">מוכן לעשות את השינוי?</h2>
-          <p className="text-lg text-neutral-600 mb-12">
-            זה לא צירוף מקרים שהגעת לכאן. זו ההזדמנות שלך להתחיל לזוז.
+          <h2 className="text-3xl md:text-4xl font-heebo font-bold text-neutral-800 mb-8">מה השלב הבא?</h2>
+          <p className="text-lg text-neutral-600 mb-6">
+            אם מה שדיברנו איתגר אותך — והבנת שזה הזמן לזוז,<br/>
+            אני כאן כדי לקחת אותך כל הדרך קדימה.
           </p>
-          
+
           <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg">
-            <h3 className="text-2xl font-heebo font-bold text-neutral-800 mb-6 rtl-specific">✉️ שלח הודעה עכשיו</h3>
-            
-            {isSubmitted ? (
-              <div className="max-w-xl mx-auto p-6 bg-green-50 rounded-lg border border-green-200 text-center">
-                <h4 className="text-xl font-medium text-green-800 mb-2">תודה שפנית אלינו!</h4>
-                <p className="text-green-700">ההודעה שלך התקבלה. ניצור איתך קשר בהקדם.</p>
-              </div>
-            ) : (
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-xl mx-auto rtl-specific">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem className="mb-6">
-                        <FormLabel className="block text-neutral-700 mb-2 text-right">שם מלא</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="שם מלא"
-                            className="w-full p-3 border border-neutral-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary text-right"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem className="mb-6">
-                        <FormLabel className="block text-neutral-700 mb-2 text-right">אימייל</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="האימייל שלך"
-                            className="w-full p-3 border border-neutral-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary text-right"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem className="mb-6">
-                        <FormLabel className="block text-neutral-700 mb-2 text-right">טלפון</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="tel"
-                            placeholder="מספר הטלפון שלך"
-                            className="w-full p-3 border border-neutral-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary text-right"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem className="mb-6">
-                        <FormLabel className="block text-neutral-700 mb-2 text-right">הודעה</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            rows={4}
-                            placeholder="איך אני יכול לעזור לך?"
-                            className="w-full p-3 border border-neutral-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary text-right"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <Button
-                    type="submit"
-                    disabled={isPending}
-                    className="w-full bg-primary hover:bg-primary-dark text-white font-medium py-3 rounded-md transition-colors duration-300"
-                  >
-                    {isPending ? "שולח..." : "שלח הודעה"}
-                  </Button>
-                </form>
-              </Form>
-            )}
-            
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <a
+              href="https://wa.link/oursct"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-primary hover:bg-primary-dark text-white font-medium py-4 px-8 rounded-md transition-colors duration-300 text-lg mb-12"
+            >
+              שלח לי הודעה ונבחר את המסלול שמתאים לך
+            </a>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
               <div>
                 <a href="tel:+972544731214" className="block group">
                   <div className="inline-block bg-neutral-100 p-3 rounded-full mb-3 group-hover:bg-primary/10 transition-colors duration-300">
@@ -182,7 +96,7 @@ export default function ContactSection() {
                   </p>
                 </a>
               </div>
-              
+
               <div>
                 <a href="mailto:itayf32@gmail.com" className="block group">
                   <div className="inline-block bg-neutral-100 p-3 rounded-full mb-3 group-hover:bg-primary/10 transition-colors duration-300">
@@ -194,7 +108,7 @@ export default function ContactSection() {
                   </p>
                 </a>
               </div>
-              
+
               <div>
                 <a href="https://www.linkedin.com/in/itayfoyerstein/" target="_blank" rel="noopener noreferrer" className="block group">
                   <div className="inline-block bg-neutral-100 p-3 rounded-full mb-3 group-hover:bg-primary/10 transition-colors duration-300">
