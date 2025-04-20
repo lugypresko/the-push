@@ -1,0 +1,768 @@
+import React, { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Check, Star, Users, Target, Calendar, X, Phone, Mail, MapPin, Instagram, Linkedin, Facebook, ChevronUp } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+
+export default function Landing() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
+
+  // Handle scroll events for animations and sticky header
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+      
+      // Find active section for nav highlight
+      const sections = document.querySelectorAll('section[id]');
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+          setActiveSection(section.id);
+        }
+      });
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  return (
+    <div className="font-sans antialiased" dir="rtl">
+      {/* Sticky Header */}
+      <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center">
+            <a href="#" className="text-2xl font-bold text-blue-900">
+              The Push
+            </a>
+            
+            <nav className="hidden md:flex items-center gap-8">
+              {[
+                { id: 'about', label: 'מי אני' },
+                { id: 'services', label: 'השירותים' },
+                { id: 'process', label: 'התהליך' },
+                { id: 'testimonials', label: 'המלצות' },
+                { id: 'tracks', label: 'מסלולים' }
+              ].map(item => (
+                <a 
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className={`text-sm font-medium hover:text-orange-500 transition-colors ${activeSection === item.id ? 'text-orange-500' : isScrolled ? 'text-gray-900' : 'text-white'}`}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+            
+            <Button 
+              size="sm"
+              className={`hidden md:flex bg-orange-500 hover:bg-orange-600 transition-all text-white rounded-full px-6`}
+            >
+              צור קשר
+            </Button>
+            
+            {/* Mobile menu button */}
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="md:hidden"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={isScrolled ? "text-gray-900" : "text-white"}>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section id="hero" className="relative min-h-screen flex items-center pt-24">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-black/90 z-0"></div>
+        {/* Background image - subtle pattern over gradient */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-10 z-0"
+          style={{
+            backgroundImage: `url("https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80")`
+          }}
+        ></div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 py-24">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <Badge className="bg-blue-900/50 hover:bg-blue-900/60 text-white mb-6 px-4 py-1.5 text-sm rounded-full animate-fade-in">הזדמנות מוגבלת</Badge>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight animate-fade-in-up">
+                הגיע הזמן <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">לשדרג</span>
+              </h1>
+              <p className="text-3xl md:text-4xl text-white opacity-90 mb-6 animate-fade-in-up" style={{ animationDelay: "200ms" }}>The Push</p>
+              <p className="text-xl text-gray-300 mb-12 max-w-xl leading-relaxed animate-fade-in-up" style={{ animationDelay: "400ms" }}>
+                מערכת הפעלה חדשה למפתחים שרוצים להפסיק לקודד ולהתחיל להוביל
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: "600ms" }}>
+                <Button 
+                  size="lg" 
+                  className="bg-orange-500 hover:bg-orange-600 text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                >
+                  <ArrowLeft className="w-5 h-5 ml-2" /> בוא נתחיל
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="bg-transparent border-white text-white hover:bg-white/10 text-lg px-8 py-6 rounded-full transition-all"
+                >
+                  איך זה עובד
+                </Button>
+              </div>
+            </div>
+            
+            <div className="hidden md:block relative animate-float">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-600 opacity-70 rounded-full blur-3xl transform -translate-x-6 translate-y-6"></div>
+              <img 
+                src="https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" 
+                alt="קבוצת עבודה" 
+                className="relative rounded-2xl shadow-2xl max-w-md mx-auto transform -rotate-3 hover:rotate-0 transition-all duration-500"
+              />
+            </div>
+          </div>
+          
+          <div className="hidden md:flex mt-24 justify-center animate-fade-in" style={{ animationDelay: "800ms" }}>
+            <div className="grid grid-cols-3 gap-12 bg-white/10 backdrop-blur-md rounded-xl p-8">
+              {[
+                { number: "15+", label: "שנות ניסיון" },
+                { number: "500+", label: "מפתחים הצליחו" },
+                { number: "90%", label: "קיבלו קידום" }
+              ].map((stat, index) => (
+                <div key={index} className="text-center">
+                  <p className="text-3xl font-bold text-white">{stat.number}</p>
+                  <p className="text-gray-300">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </div>
+      </section>
+
+      {/* About Me Section */}
+      <section id="about" className="py-32 bg-white relative overflow-hidden">
+        <div className="absolute left-0 top-0 w-1/3 h-full bg-gradient-to-r from-orange-50 to-transparent opacity-70"></div>
+        <div className="absolute right-0 bottom-0 w-1/3 h-1/2 bg-gradient-to-l from-blue-50 to-transparent opacity-70"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="flex flex-col md:flex-row gap-16 items-center">
+            <div className="md:w-2/5">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-200 to-orange-400 transform -translate-x-6 translate-y-6 rounded-3xl"></div>
+                <img 
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1588&q=80" 
+                  alt="מנטורית מקצועית" 
+                  className="relative z-10 rounded-3xl shadow-xl object-cover w-full h-[600px]"
+                />
+                <div className="absolute -bottom-10 -right-10 bg-white rounded-xl shadow-xl p-6 z-20">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                      <Star className="w-6 h-6 text-orange-500" />
+                    </div>
+                    <div>
+                      <p className="font-bold">15+ שנות ניסיון</p>
+                      <p className="text-gray-600 text-sm">בתעשיית ההייטק</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="md:w-3/5 space-y-8">
+              <Badge className="bg-orange-100 text-orange-800 mb-2 px-3 py-1 text-sm rounded-full">מי אני</Badge>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+                ממפתחת לנווטת<br />
+                <span className="text-blue-600">של מפתחים מובילים</span>
+              </h2>
+              <div className="w-24 h-1 bg-orange-500"></div>
+              <p className="text-xl text-gray-700 leading-relaxed">
+                שלום! אני מנטורית לפיתוח יכולות ניהול והובלה למפתחים מנוסים שרוצים לעשות את הקפיצה לתפקידי ניהול.
+              </p>
+              <p className="text-xl text-gray-700 leading-relaxed">
+                עם 15 שנים בתעשיית ההייטק ורקע בפיתוח, אני מבינה בדיוק את האתגרים של המעבר מקידוד להובלה.
+              </p>
+              <p className="text-xl text-gray-700 leading-relaxed">
+                הגישה שלי מתמקדת בבניית מערכת ניהולית אישית שמתאימה לך ולסביבה בה אתה עובד - לא בשיטות גנריות שלא באמת עובדות.
+              </p>
+              
+              <div className="pt-6">
+                <Button 
+                  size="lg" 
+                  className="bg-blue-900 hover:bg-blue-800 text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all"
+                >
+                  בואו נכיר
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services/Offerings Section */}
+      <section id="services" className="py-32 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <Badge className="bg-blue-100 text-blue-800 mb-4 px-3 py-1 text-sm rounded-full">השירותים שלנו</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">מה נבנה בתהליך?</h2>
+            <p className="text-xl text-gray-600">
+              מתודולוגיה מוכחת לעבור מפיתוח מוצלח להובלה אפקטיבית
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-10">
+            {[
+              {
+                icon: Users,
+                title: "הגדרת גרסת המנהל שלך",
+                points: [
+                  "מי אתה באמת — בלי תחפושות ניהול קלאסיות",
+                  "איך לבנות זהות שתואמת את מי שאתה ואת מה שהחברה שלך צריכה"
+                ]
+              },
+              {
+                icon: Target,
+                title: "מיתוג פנימי בארגון",
+                points: [
+                  "איך יוצרים נראות של 'הבחור שצריך להיות בחדר כשיש החלטות'",
+                  "בלי למכור את עצמך. בלי לחכות להזדמנות. אתה יוצר אותה."
+                ]
+              },
+              {
+                icon: Star,
+                title: "Roadmap לתפקיד הבא",
+                points: [
+                  "בניית מסלול קידום אישי ריאלי ל־3–6 חודשים",
+                  "הכנה להצעות, ראיונות פנימיים, ומצבי אמת"
+                ]
+              }
+            ].map((service, index) => (
+              <div 
+                key={index} 
+                className="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-8 border border-gray-100 hover:border-orange-200 relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-orange-100 to-transparent rounded-bl-full group-hover:scale-110 transition-transform duration-300"></div>
+                <div className="relative">
+                  <div className="w-16 h-16 bg-orange-100 group-hover:bg-orange-200 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                    <service.icon className="w-8 h-8 text-orange-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-6 text-gray-900">{service.title}</h3>
+                  <ul className="space-y-4">
+                    {service.points.map((point, i) => (
+                      <li key={i} className="flex items-start">
+                        <Check className="w-5 h-5 text-orange-500 mt-1 ml-3 flex-shrink-0" />
+                        <span className="text-gray-700">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-8 pt-6 border-t border-gray-100">
+                    <a href="#" className="text-orange-500 font-medium flex items-center hover:text-orange-600 transition-colors">
+                      קרא עוד 
+                      <ArrowLeft className="w-4 h-4 mr-2" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* The Push Process Section */}
+      <section id="process" className="py-32 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-blue-50 opacity-50 -skew-y-6 transform origin-top-left z-0"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-20">
+            <Badge className="bg-blue-100 text-blue-800 mb-4 px-3 py-1 text-sm rounded-full">התהליך</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">The Push</h2>
+            
+            <div className="relative mb-16 max-w-4xl mx-auto">
+              <img 
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" 
+                alt="עבודת צוות" 
+                className="rounded-2xl shadow-xl w-full"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-blue-900/20 to-transparent rounded-2xl flex items-end">
+                <div className="p-8 text-white text-right">
+                  <p className="text-2xl font-bold mb-2">תהליך ליווי אישי להצלחה ניהולית</p>
+                  <p className="text-lg">התקנת מערכת הפעלה חדשה להתנהלות ניהולית</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <p className="text-xl text-gray-700 leading-relaxed">
+                תהליך ליווי אישי למפתח שרוצה להפוך למנהל שלא רק מגיב — אלא בונה מערכת שמובילה אותו קדימה.
+                לא קואוצ'ינג כללי. לא תיאוריה. זו התקנת מערכת הפעלה חדשה להתנהלות ניהולית.
+              </p>
+            </div>
+          </div>
+
+          {/* Process Steps */}
+          <div className="relative">
+            {/* Connecting line */}
+            <div className="absolute right-1/2 top-0 bottom-0 w-0.5 bg-blue-200 hidden md:block"></div>
+            
+            <div className="space-y-24">
+              {[
+                {
+                  step: "01",
+                  title: "אבחון ומיפוי",
+                  description: "מיפוי מלא של הסגנון הניהולי הקיים שלך וזיהוי החסמים שעוצרים אותך",
+                  points: ["מיפוי הסגנון הניהולי הקיים", "הבנת החסמים", "הגדרת יעדים אסטרטגיים"]
+                },
+                {
+                  step: "02",
+                  title: "התקנת מערכת ניהולית",
+                  description: "בניית עקרונות פעולה אישיים שיובילו אותך להצלחה אמיתית",
+                  points: ["בניית עקרונות פעולה אישיים", "התאמת כלי ניהול", "פיתוח שפה ניהולית חדשה"]
+                },
+                {
+                  step: "03",
+                  title: "חיזוק נראות והשפעה",
+                  description: "למידה איך להציג את הערך שלך בצורה אפקטיבית ולהגדיל השפעה",
+                  points: ["תרגול שיחות מול הנהלה", "הצגת ערך ניהולי", "טיפול בהתנגדויות"]
+                },
+                {
+                  step: "04",
+                  title: "מסלול קידום אישי",
+                  description: "בניית תכנית פעולה מדויקת לקידום לתפקיד הניהולי הבא שלך",
+                  points: ["בניית Roadmap", "סימולציות לראיונות", "תכנית המשך ארוכת טווח"]
+                }
+              ].map((phase, index) => (
+                <div key={index} className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}>
+                  <div className="md:w-1/2 relative">
+                    <div className="hidden md:block absolute top-0 bottom-0 right-0 left-0 flex items-center justify-center">
+                      <div className={`w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center z-20 absolute ${index % 2 === 0 ? 'left-0 -translate-x-1/2' : 'right-0 translate-x-1/2'}`}>
+                        <span className="text-white font-bold">{phase.step}</span>
+                      </div>
+                    </div>
+                    <div className={`p-8 rounded-xl shadow-xl bg-white border border-gray-100 relative z-10 ${index % 2 === 0 ? 'md:ml-8' : 'md:mr-8'}`}>
+                      <div className="md:hidden w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center mb-4">
+                        <span className="text-white font-bold">{phase.step}</span>
+                      </div>
+                      <h3 className="text-2xl font-bold mb-4 text-gray-900">{phase.title}</h3>
+                      <p className="text-gray-600 mb-6">{phase.description}</p>
+                      <ul className="space-y-2">
+                        {phase.points.map((point, i) => (
+                          <li key={i} className="flex items-center">
+                            <div className="w-2 h-2 rounded-full bg-orange-500 ml-3"></div>
+                            <span className="text-gray-700">{point}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="md:w-1/2">
+                    <img 
+                      src={`https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80&auto=format&fit=crop&crop=entropy&q=80`} 
+                      alt={phase.title} 
+                      className="rounded-xl shadow-lg"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-32 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <Badge className="bg-orange-100 text-orange-800 mb-4 px-3 py-1 text-sm rounded-full">עדויות והמלצות</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">מה אומרים המשתתפים</h2>
+            <p className="text-xl text-gray-600">
+              אלפי מפתחים כבר עשו את המעבר להובלה בעזרת The Push
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "דניאל לוי",
+                role: "מנהל צוות, גוגל",
+                image: "https://randomuser.me/api/portraits/men/32.jpg",
+                quote: "הליווי של The Push שינה את הקריירה שלי. היום אני לא רק מפתח טוב יותר, אלא גם מוביל צוות שמשפיע על כיוון המוצר."
+              },
+              {
+                name: "נועה כהן",
+                role: "ארכיטקטית תוכנה, מיקרוסופט",
+                image: "https://randomuser.me/api/portraits/women/44.jpg",
+                quote: "למדתי איך להוביל מתוך נקודות החוזק שלי במקום לנסות להיות מישהו שאני לא. הנראות שלי בארגון השתפרה פלאים."
+              },
+              {
+                name: "עמית גולן",
+                role: "ראש צוות פיתוח, פייסבוק",
+                image: "https://randomuser.me/api/portraits/men/62.jpg",
+                quote: "בתוך חצי שנה קיבלתי קידום לראש צוות, עם העלאת שכר משמעותית. החזר ההשקעה היה מטורף."
+              }
+            ].map((testimonial, index) => (
+              <div key={index} className="bg-white rounded-xl shadow-lg p-8 border border-gray-100 hover:border-orange-200 hover:shadow-xl transition-all">
+                <div className="flex items-center mb-6">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name} 
+                    className="w-14 h-14 rounded-full object-cover border-2 border-orange-500"
+                  />
+                  <div className="mr-4">
+                    <p className="font-bold text-gray-900">{testimonial.name}</p>
+                    <p className="text-orange-500 text-sm">{testimonial.role}</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 italic">"{testimonial.quote}"</p>
+                <div className="mt-6 flex">
+                  {[1, 2, 3, 4, 5].map(star => (
+                    <Star key={star} className="w-5 h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="mt-16 text-center">
+            <p className="text-lg text-gray-600 mb-8">מצטרפים לקהילה של יותר מ-500 מובילים בתעשייה</p>
+            <div className="flex justify-center flex-wrap gap-12">
+              {['Google', 'Microsoft', 'Meta', 'Apple', 'Amazon'].map((company, index) => (
+                <div key={index} className="text-gray-400 text-2xl font-bold">{company}</div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action Section - Dark Blue */}
+      <section id="cta" className="py-32 bg-blue-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <Badge className="bg-blue-800 text-blue-100 mb-6 px-3 py-1 text-sm rounded-full">זמן להחלטה</Badge>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">מוכן להתחיל?</h2>
+              <p className="text-xl text-blue-100 mb-8 leading-relaxed">
+                אם אתה מרגיש שהגיע הזמן לעבור לשלב הבא בקריירה, The Push הוא הכלי שיעזור לך לעשות את זה נכון.
+              </p>
+              <Button 
+                size="lg" 
+                className="bg-orange-500 hover:bg-orange-600 text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+              >
+                <ArrowLeft className="w-5 h-5 ml-2" /> דבר איתי עכשיו
+              </Button>
+              
+              <p className="text-blue-200 mt-8 text-sm">
+                * המקומות מוגבלים. פתיחת המחזור הבא: 15 ליוני
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { title: "8 שבועות", subtitle: "אינטנסיבי", icon: Calendar },
+                { title: "מפגשים אישיים", subtitle: "בזום או פרונטלי", icon: Users },
+                { title: "תמיכה שוטפת", subtitle: "בין המפגשים", icon: Star },
+                { title: "חומרי תרגול", subtitle: "מותאמים אישית", icon: Target },
+              ].map((item, index) => (
+                <div key={index} className="bg-white/10 backdrop-blur hover:bg-white/15 transition-colors rounded-lg p-6 flex items-start">
+                  <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center mr-4">
+                    <item.icon className="w-5 h-5 text-orange-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                    <p className="text-blue-200">{item.subtitle}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tracks Section */}
+      <section id="tracks" className="py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <Badge className="bg-blue-100 text-blue-800 mb-4 px-3 py-1 text-sm rounded-full">המסלולים</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">3 מסלולים מותאמים</h2>
+            <p className="text-xl text-gray-600">
+              בחר את המסלול שמתאים לך ולשאיפות שלך
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "מסלול קצר",
+                price: "₪ 2,500",
+                color: "from-blue-400 to-blue-600",
+                popular: false,
+                description: "מי שרוצה להתחיל בזהירות",
+                details: "מסלול טעימה — לטעום את השיטה, להבין את הכיוון, לבדוק התאמה",
+                features: [
+                  "3 מפגשי ייעוץ אישיים",
+                  "אבחון סגנון ניהול",
+                  "חוברת עבודה מקיפה",
+                  "תמיכה במייל"
+                ]
+              },
+              {
+                title: "מסלול מלא",
+                price: "₪ 7,900",
+                color: "from-orange-400 to-orange-600",
+                popular: true,
+                description: "מי שבא לעבוד ולהתקדם",
+                details: "המסלול שבנוי למנהלים שרוצים תוצאה אמיתית תוך 3–6 חודשים. הכי נכון לרוב האנשים",
+                features: [
+                  "8 מפגשי ליווי אישיים",
+                  "אבחון מקיף + תכנית אישית",
+                  "חומרי עבודה + תרגילים",
+                  "תמיכה שוטפת בוואטסאפ",
+                  "הקלטות מפגשים לצפייה חוזרת"
+                ]
+              },
+              {
+                title: "מסלול פרימיום",
+                price: "₪ 12,500",
+                color: "from-purple-400 to-purple-600",
+                popular: false,
+                description: "מי שרוצה ליווי מלא ומותאם",
+                details: "מתאים למי שיודע שהוא נכנס לטרנספורמציה עמוקה — ורוצה אותי צמוד אליו עד שהוא שם",
+                features: [
+                  "12 מפגשי ליווי אישיים",
+                  "אבחון מקיף ומותאם אישית",
+                  "ליווי אישי בהתאמה לצרכים",
+                  "נגישות מלאה בוואטסאפ",
+                  "שיחות חירום לפי צורך",
+                  "משוב מדירקטורים בתעשייה"
+                ]
+              }
+            ].map((track, index) => (
+              <div 
+                key={index}
+                className={`rounded-2xl border ${track.popular ? 'border-orange-200 shadow-xl scale-105 z-10' : 'border-gray-200 shadow-lg'} bg-white overflow-hidden transition-all hover:shadow-xl relative`}
+              >
+                {track.popular && (
+                  <div className="absolute top-0 left-0 right-0 bg-orange-500 text-white text-center py-1 text-sm font-medium">
+                    הפופולרי ביותר
+                  </div>
+                )}
+                <div className={`h-2 w-full bg-gradient-to-r ${track.color}`}></div>
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold mb-2 text-gray-900">{track.title}</h3>
+                  <p className="text-gray-500 mb-6">{track.description}</p>
+                  
+                  <div className="mb-8">
+                    <span className="text-3xl font-bold text-gray-900">{track.price}</span>
+                    <span className="text-gray-500 mr-2">/ לתהליך</span>
+                  </div>
+                  
+                  <p className="text-gray-700 mb-8">{track.details}</p>
+                  
+                  <ul className="space-y-3 mb-8">
+                    {track.features.map((feature, i) => (
+                      <li key={i} className="flex items-center">
+                        <Check className="w-5 h-5 text-green-500 ml-3 flex-shrink-0" />
+                        <span className="text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <Button 
+                    className={`w-full py-6 rounded-xl ${track.popular ? 'bg-orange-500 hover:bg-orange-600' : 'bg-blue-900 hover:bg-blue-800'} text-white font-medium text-lg`}
+                  >
+                    בחר מסלול
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Now Section */}
+      <section className="py-32 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <Badge className="bg-blue-100 text-blue-800 mb-4 px-3 py-1 text-sm rounded-full">זה הזמן</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">למה דווקא עכשיו?</h2>
+            <div className="space-y-6 text-xl text-gray-700">
+              <p>אנשים חכמים דוחים החלטות. תמיד יש עוד פיצ'ר, עוד דדליין, עוד רבעון.</p>
+              <p>אבל אם אתה מרגיש שאתה דורך במקום — זה לא ישתנה מעצמו.</p>
+              <p className="text-2xl text-orange-500 font-semibold">הקריירה שלך לא תעצור — עד שתחליט לעצור רגע ולכוון אותה.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Not For Everyone Section */}
+      <section className="py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 flex items-center justify-center gap-2">
+              <X className="w-10 h-10 text-red-500" />
+              זה לא מתאים לכולם
+            </h2>
+            <div className="space-y-6 text-xl text-gray-700">
+              <p>אם אתה מחפש מישהו שייתן לך פתרונות קסם — זה לא בשבילך.</p>
+              <p>אם אתה מוכן לעבוד, להשתנות, ולעלות רמה — בוא נדבר.</p>
+              <p className="font-bold text-orange-500">✉️ שלח הודעה עכשיו.</p>
+              <p>זה לא צירוף מקרים שהגעת לכאן. זו ההזדמנות שלך להתחיל לזוז.</p>
+            </div>
+            <Button 
+              size="lg"
+              className="mt-12 bg-orange-500 hover:bg-orange-600 text-lg px-10 py-7 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+            >
+              <ArrowLeft className="w-5 h-5 ml-2" /> דבר איתי עכשיו 
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid md:grid-cols-4 gap-12">
+            <div className="md:col-span-2">
+              <h3 className="text-3xl font-bold mb-6">The Push</h3>
+              <p className="text-gray-400 mb-8 max-w-md">
+                מערכת הפעלה חדשה למפתחים שרוצים להפסיק לקודד ולהתחיל להוביל. הצטרף לקהילה של יותר מ-500 מובילים שכבר עשו את המעבר.
+              </p>
+              <div className="flex space-x-4 space-x-reverse">
+                <a href="#" className="bg-white/10 hover:bg-white/20 p-3 rounded-full transition-colors">
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a href="#" className="bg-white/10 hover:bg-white/20 p-3 rounded-full transition-colors">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a href="#" className="bg-white/10 hover:bg-white/20 p-3 rounded-full transition-colors">
+                  <Facebook className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-xl font-bold mb-6">ניווט מהיר</h3>
+              <ul className="space-y-3">
+                {[
+                  { label: 'דף הבית', href: '#hero' },
+                  { label: 'מי אני', href: '#about' },
+                  { label: 'השירותים', href: '#services' },
+                  { label: 'התהליך', href: '#process' },
+                  { label: 'המלצות', href: '#testimonials' },
+                  { label: 'מסלולים', href: '#tracks' }
+                ].map((link) => (
+                  <li key={link.label}>
+                    <a 
+                      href={link.href} 
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-xl font-bold mb-6">צור קשר</h3>
+              <div className="space-y-4">
+                <div className="flex items-center">
+                  <Phone className="w-5 h-5 ml-3 text-orange-400" />
+                  <span>123-456-7890</span>
+                </div>
+                <div className="flex items-center">
+                  <Mail className="w-5 h-5 ml-3 text-orange-400" />
+                  <span>info@thepush.co.il</span>
+                </div>
+                <div className="flex items-center">
+                  <MapPin className="w-5 h-5 ml-3 text-orange-400" />
+                  <span>תל אביב, ישראל</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="border-t border-gray-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-gray-400">
+                © {new Date().getFullYear()} The Push. כל הזכויות שמורות.
+              </p>
+              <div className="flex space-x-6 space-x-reverse">
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">מדיניות פרטיות</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">תנאי שימוש</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* Back to top button */}
+      <button 
+        onClick={scrollToTop}
+        className={`fixed bottom-8 left-8 p-3 rounded-full bg-orange-500 text-white shadow-lg z-50 transition-all duration-300 ${isScrolled ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+      >
+        <ChevronUp className="w-5 h-5" />
+      </button>
+
+      {/* Custom CSS for animations */}
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes float {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+          100% { transform: translateY(0px); }
+        }
+        
+        .animate-fade-in {
+          animation: fadeIn 1s ease forwards;
+        }
+        
+        .animate-fade-in-up {
+          animation: fadeInUp 1s ease forwards;
+        }
+        
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+      `}</style>
+    </div>
+  );
+}
